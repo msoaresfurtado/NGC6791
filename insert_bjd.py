@@ -13,7 +13,7 @@ BJD_files = glob.glob("BJD_extracted/BJD_*.txt")
 
 BJD_dicts_dict = {}
 for i in range(len(BJD_files)):
-    #print BJD_files[i]
+    print(BJD_files[i])
     key = int(BJD_files[i].split("/")[-1].split("_")[1].split(".")[0])
     cadence_no, zeroindex_cno, BJD = np.genfromtxt(BJD_files[i],
                                                    unpack=True)
@@ -47,9 +47,9 @@ for i in range(len(ranges)):
 photometry_output_files = glob.glob("subtraction_photometry_output/" + 
                                     "photometry_output_*.out")
 photometry_output_files = [f for f in photometry_output_files if "BJDprepended" not in f] # to cut out the 
-previously prepended files in the same directory
+#previously prepended files in the same directory
 
-print len(photometry_output_files), " photometry output files to process"
+print(len(photometry_output_files), " photometry output files to process")
 
 for p_file in photometry_output_files:
     one_indexed_cad_num = p_file.split(".")[0].split("_")[-1]
@@ -68,11 +68,9 @@ for p_file in photometry_output_files:
     for j in range(4,len(lines)):
         first_space = lines[j].index(' ')
         splits = lines[j].split()
-        BJD = BJD_dicts_dict[quick_TPF_match[int(float(splits[1]))/50][int(float(splits[2]))/50]][zero_inde
-x]
+        BJD = BJD_dicts_dict[quick_TPF_match[int(float(splits[1]))/50][int(float(splits[2]))/50]][zero_index]
         #print BJD
-        lines[j] = lines[j][:first_space] + "  " + str(BJD).ljust(13) + "  " + one_indexed_cad_num.rjust(4)
- + " " +\
+        lines[j] = lines[j][:first_space] + "  " + str(BJD).ljust(13) + "  " + one_indexed_cad_num.rjust(4) + " " +\
             lines[j][first_space:]
 
     output_file = "subtraction_photometry_output/photometry_output_BJDprepended_" +\
@@ -81,3 +79,4 @@ x]
     with open(output_file,"w") as f:
         for line in lines:
             f.write(line)
+print('Huzzah, you have incorporated the BJD dates! Make sure these look sane!')
