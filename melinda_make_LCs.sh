@@ -1,7 +1,7 @@
 #!/bin/bash
 INLIST=lc_cads.dat
-LC=/Users/msoaresfurtado/Desktop/b0i0d10/
-INPATH=/Users/msoaresfurtado/Desktop/subtraction_photometry_output/photometry_output_
+LC=/Users/msoaresfurtado/Dropbox/Research_NGC6791/Notebooks/b0i0d10/
+INPATH=/Users/msoaresfurtado/Dropbox/Research_NGC6791/Notebooks/subtraction_photometry_output/photometry_output_
 for base in $(cat $INLIST);
 do
     JDs=${base: -5}
